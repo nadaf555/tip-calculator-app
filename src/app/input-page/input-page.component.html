@@ -1,0 +1,24 @@
+<form #tipForm="ngForm" (ngSubmit)="calculateTip()">
+    <div>
+        <label for="costOfService">Cost of Service:</label>
+        <input type="number" id="costOfService" name="costOfService" required
+        [(ngModel)]="costOfService" #costOfServiceInput="ngModel">
+        <div *ngIf="costOfServiceInput.invalid && (costOfServiceInput.dirty || costOfServiceInput.touched)">
+        <div *ngIf="costOfServiceInput.errors?.['required']">Cost of Service is required.</div>
+        </div>
+    </div>
+
+    <div>
+        <label>Service Quality:</label><br>
+        <input type="radio" id="okey" name="serviceQuality" value="0.15" [(ngModel)]="tipPercentage"> Okey (15%)<br>
+        <input type="radio" id="good" name="serviceQuality" value="0.18" [(ngModel)]="tipPercentage"> Good (18%)<br>
+        <input type="radio" id="excellent" name="serviceQuality" value="0.20" [(ngModel)]="tipPercentage"> Excellent (20%)<br>
+    </div>
+
+    <div>
+        <label for="roundUpTip">Round Up Tip:</label>
+        <input type="checkbox" id="roundUpTip" name="roundUpTip" [(ngModel)]="roundUpTip">
+    </div>
+
+    <button type="submit" [disabled]="tipForm.invalid">Calculate Tip</button>
+</form>
